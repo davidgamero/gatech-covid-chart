@@ -49,10 +49,11 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Georgia Tech Daily COVID19 Cases</h1>
+
         {
           data ?
             <div>
+              <h1>Georgia Tech Daily COVID19 Cases</h1>
               <Line
                 data={data}
 
@@ -122,7 +123,7 @@ function App() {
               </table>
             </div> : <div>
               <GridLoader size={15} color="rgb(232, 193, 160)"></GridLoader>
-              <h3>'Loading COVID Data...'</h3>
+              <h3>Loading COVID Data...</h3>
             </div>
         }
       </header>
