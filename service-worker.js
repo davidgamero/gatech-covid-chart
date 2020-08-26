@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/gatech-covid-chart/precache-manifest.c4d393daa8e7d159142d7c8067a8a733.js"
+  "/gatech-covid-chart/precache-manifest.fe243ca304db20157837dc0e48593a95.js"
 );
 
 self.addEventListener('message', (event) => {
