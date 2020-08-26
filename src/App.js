@@ -55,9 +55,19 @@ function App() {
               width={window.innerWidth * 0.8}
               height={window.innerHeight * 0.8}
 
-              useMesh={false}
+              useMesh={true}
+              tooltip={({ point }) => {
+                console.log(point)
+                return <div>
+                  <p class="tooltip-row">{point.data.xFormatted}</p>
+                  <p class="tooltip-row">{'' + point.data.y + 'cases'}</p>
+                </div>
+              }}
               enableSlices={false}
-
+              yScale={{
+                type: 'linear'
+              }}
+              yFormat={(row) => 'a'}
               xFormat="time:%Y-%m-%d"
               xScale={{
                 type: 'time',
@@ -65,14 +75,18 @@ function App() {
               }}
               axisBottom={{
                 legend: 'Date',
-                legendOffset: 10,
+                legendOffset: 40,
                 format: '%Y %b %d',
-                tickValues: 'every month',
+                tickValues: 8,
+                legendPosition: 'middle'
               }}
               axisLeft={{
                 legend: 'Cases',
-                legendOffset: -40
+                legendOffset: -40,
+                legendPosition: 'middle'
               }}
+              axisTop={null}
+              axisRight={null}
               enableGridX={false}
               enableGridY={false}
               theme={theme}
