@@ -58,7 +58,7 @@ function App() {
         {
           data ?
             <div>
-              <h1>Georgia Tech Daily COVID19 Cases</h1>
+              <h1>Georgia Tech Daily Covid-19 Cases</h1>
               <div class="fork-me">
                 <a class="fork-me" href="https://github.com/davidgamero/gatech-covid-chart">Fork me on GitHub </a>
                 <FaGithubSquare size={25} />
