@@ -14,7 +14,7 @@ function App() {
   let [tableData, setTableData] = useState();
 
   useEffect(() => {
-    document.title = "GATech COVID19 Chart"
+    document.title = "GATech Covid-19 Chart"
   }, []);
 
   useEffect(() => {
