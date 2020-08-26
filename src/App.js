@@ -9,6 +9,7 @@ function App() {
   const CSV_URL = 'https://gatech-covid-19-data.s3.amazonaws.com/gatech_covid_data.csv';
 
   let [data, setData] = useState();
+  let [tableData, setTableData] = useState();
 
   useEffect(() => {
     Papa.parse(CSV_URL,
@@ -31,6 +32,7 @@ function App() {
             y: row.cases
           }));
           console.log(data);
+          setTableData(data.reverse());
           setData([{
             id: 0,
             data: data
@@ -42,61 +44,82 @@ function App() {
   const theme = {
     textColor: '#ffffff',
   };
-
+  console.log('' + window.innerWidth + ' ' + window.innerHeight);
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Georgia Tech COVID Cases over Time</h1>
+        <h1>Georgia Tech Daily COVID19 Cases</h1>
         {
           data ?
-            <Line
-              data={data}
+            <div>
+              <Line
+                data={data}
 
-              width={window.innerWidth * 0.8}
-              height={window.innerHeight * 0.8}
+                width={window.innerWidth * 0.8}
+                height={window.innerHeight * 0.6}
 
-              useMesh={true}
-              tooltip={({ point }) => {
-                console.log(point)
-                return <div>
-                  <p class="tooltip-row">{point.data.xFormatted}</p>
-                  <p class="tooltip-row">{'' + point.data.y + 'cases'}</p>
-                </div>
-              }}
-              enableSlices={false}
-              yScale={{
-                type: 'linear'
-              }}
-              yFormat={(row) => 'a'}
-              xFormat="time:%Y-%m-%d"
-              xScale={{
-                type: 'time',
-                format: 'native',
-              }}
-              axisBottom={{
-                legend: 'Date',
-                legendOffset: 40,
-                format: '%Y %b %d',
-                tickValues: 8,
-                legendPosition: 'middle'
-              }}
-              axisLeft={{
-                legend: 'Cases',
-                legendOffset: -40,
-                legendPosition: 'middle'
-              }}
-              axisTop={null}
-              axisRight={null}
-              enableGridX={false}
-              enableGridY={false}
-              theme={theme}
-              margin={{
-                bottom: 50,
-                top: 50,
-                left: 50,
-                right: 50
-              }}
-            /> : 'Loading'
+                useMesh={window.innerWidth > 700}
+                tooltip={({ point }) => {
+                  // console.log(point)
+                  return <div>
+                    <h3 class="tooltip-row">{point.data.xFormatted}</h3>
+                    <h3 class="tooltip-row">{'' + point.data.y + 'cases'}</h3>
+                  </div>
+                }}
+                enableSlices={false}
+                yScale={{
+                  type: 'linear'
+                }}
+                yFormat={(row) => 'a'}
+                xFormat="time:%Y-%m-%d"
+                xScale={{
+                  type: 'time',
+                  format: 'native',
+                }}
+                axisBottom={{
+                  legend: 'Date',
+                  legendOffset: 40,
+                  format: '%b %d %Y',
+                  tickValues: Math.floor(window.innerWidth / 200),
+                  legendPosition: 'middle'
+                }}
+                axisLeft={{
+                  legend: 'Cases',
+                  legendOffset: -40,
+                  legendPosition: 'middle'
+                }}
+                axisTop={null}
+                axisRight={null}
+                enablePoints={window.innerWidth > 700}
+                enableGridX={false}
+                enableGridY={false}
+                theme={theme}
+                margin={{
+                  bottom: 50,
+                  top: 50,
+                  left: 50,
+                  right: 50
+                }}
+              />
+              <h3 class="table-title">Data from
+                <a class="table-title" href="https://github.com/davidgamero/gatech-covid-data-scraper">gatech-covid-data-scraper</a>
+              </h3>
+              <table width={window.innerWidth * 0.8}
+                class="covid-table">
+                <tr>
+                  <th>Date</th>
+                  <th>Cases</th>
+                </tr>
+                <tbody>
+                  {tableData.map((row) => {
+                    return <tr class="covid-table">
+                      <td class="covid-table">{moment(row.x).format('MMM-DD-YYYY')}</td>
+                      <td class="covid-table">{row.y}</td>
+                    </tr>
+                  })}
+                </tbody>
+              </table>
+            </div> : 'Loading'
         }
       </header>
     </div>
