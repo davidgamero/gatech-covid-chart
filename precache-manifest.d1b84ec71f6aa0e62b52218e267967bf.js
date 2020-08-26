@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3f62052e7740c475fdc6f4100b841690",
+    "revision": "01e55ad197ea660399f9ed05ce635e27",
     "url": "/gatech-covid-chart/index.html"
   },
   {
-    "revision": "7db85cfea0d81ce57300",
+    "revision": "97ed49c3c67d9b5f7bd7",
     "url": "/gatech-covid-chart/static/css/main.168bc2ff.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/gatech-covid-chart/static/js/2.856e7d34.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "7db85cfea0d81ce57300",
-    "url": "/gatech-covid-chart/static/js/main.c7b974e0.chunk.js"
+    "revision": "97ed49c3c67d9b5f7bd7",
+    "url": "/gatech-covid-chart/static/js/main.bdc31bd7.chunk.js"
   },
   {
     "revision": "e66b96f16a3c5b36b21c",
