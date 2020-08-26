@@ -14,6 +14,10 @@ function App() {
   let [tableData, setTableData] = useState();
 
   useEffect(() => {
+    document.title = "GATech COVID19 Chart"
+  }, []);
+
+  useEffect(() => {
     Papa.parse(CSV_URL,
       {
         download: true,
