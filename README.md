@@ -1,4 +1,4 @@
-# 📈 GATech Covid Chart
+# 📈 GATech COVID19 Chart
 A line chart showing COVID19 cases aggregated per day from the [GATech Exposure and Health Alerts](https://health.gatech.edu/coronavirus/health-alerts)
 
 💾 Data is scraped and sourced by my [gatech-covid-data-scraper](https://github.com/davidgamero/gatech-covid-data-scraper)
