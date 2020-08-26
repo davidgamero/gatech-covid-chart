@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5b86cfe40349b80a1eb8c562287972a5",
+    "revision": "98dd4faf8ba2ab1eb8c74ebbde6cccf8",
     "url": "/gatech-covid-chart/index.html"
   },
   {
-    "revision": "84095f66596ea3c268f0",
-    "url": "/gatech-covid-chart/static/css/main.86fcb08b.chunk.css"
+    "revision": "333f4391625057fb1d94",
+    "url": "/gatech-covid-chart/static/css/main.168bc2ff.chunk.css"
   },
   {
-    "revision": "4c3e768bd9c649e099b0",
-    "url": "/gatech-covid-chart/static/js/2.97c03185.chunk.js"
+    "revision": "9bae071a710b5ed5b5e3",
+    "url": "/gatech-covid-chart/static/js/2.856e7d34.chunk.js"
   },
   {
     "revision": "74a676a9bb0872088eb7399c04d7f0b1",
-    "url": "/gatech-covid-chart/static/js/2.97c03185.chunk.js.LICENSE.txt"
+    "url": "/gatech-covid-chart/static/js/2.856e7d34.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "84095f66596ea3c268f0",
-    "url": "/gatech-covid-chart/static/js/main.7750f5cf.chunk.js"
+    "revision": "333f4391625057fb1d94",
+    "url": "/gatech-covid-chart/static/js/main.b4cb07e9.chunk.js"
   },
   {
     "revision": "e66b96f16a3c5b36b21c",
