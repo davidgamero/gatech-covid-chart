@@ -5,6 +5,7 @@ import Papa from 'papaparse';
 import { Line, ResponsiveLine } from '@nivo/line'
 import moment from 'moment';
 import GridLoader from 'react-spinners/GridLoader';
+import FaGitHub, { FaGithubSquare } from 'react-icons/fa'
 
 function App() {
   const CSV_URL = 'https://gatech-covid-19-data.s3.amazonaws.com/gatech_covid_data.csv';
@@ -54,6 +55,10 @@ function App() {
           data ?
             <div>
               <h1>Georgia Tech Daily COVID19 Cases</h1>
+              <div class="fork-me">
+                <a class="fork-me" href="https://github.com/davidgamero/gatech-covid-chart">Fork me on GitHub </a>
+                <FaGithubSquare size={25} />
+              </div>
               <Line
                 data={data}
 

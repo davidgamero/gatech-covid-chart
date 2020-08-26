@@ -65,3 +65,17 @@ table.covid-table {
 td.covid-table {
   border-top: 1px solid white;
 }
+
+a.fork-me {
+  color: white;
+  font-size: 1rem;
+  margin-right: 5px;
+}
+
+div.fork-me {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  justify-items: center;
+}
