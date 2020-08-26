@@ -51,21 +51,27 @@ function App() {
           data ?
             <Line
               data={data}
-              isInteractive={true}
+
               width={window.innerWidth * 0.8}
               height={window.innerHeight * 0.8}
-              curve="monotoneX"
-              yFormat={(y) => '' + y}
-              xFormat={(x) =>
-                'poop'
-              }
+
+              useMesh={false}
+              enableSlices={false}
+
+              xFormat="time:%Y-%m-%d"
               xScale={{
                 type: 'time',
-                format: 'native'
+                format: 'native',
               }}
               axisBottom={{
+                legend: 'Date',
+                legendOffset: 10,
                 format: '%Y %b %d',
                 tickValues: 'every month',
+              }}
+              axisLeft={{
+                legend: 'Cases',
+                legendOffset: -40
               }}
               enableGridX={false}
               enableGridY={false}

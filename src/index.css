@@ -12,11 +12,6 @@ code {
     monospace;
 }
 
-text {
-  color: white;
-  fill: white;
-}
-
 h1 {
   color: rgb(232, 193, 160);
   size: 2rem;
