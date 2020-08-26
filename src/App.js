@@ -27,7 +27,7 @@ function App() {
 
           // Map to xy
           data = data.map((row) => ({
-            x: Date.parse(row.date),
+            x: new Date(row.date),
             y: row.cases
           }));
           console.log(data);
@@ -46,6 +46,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <h1>Georgia Tech COVID Cases over Time</h1>
         {
           data ?
             <Line
@@ -56,8 +57,16 @@ function App() {
               curve="monotoneX"
               yFormat={(y) => '' + y}
               xFormat={(x) =>
-                moment(x).format('MMM D, YYYY')
+                'poop'
               }
+              xScale={{
+                type: 'time',
+                format: 'native'
+              }}
+              axisBottom={{
+                format: '%Y %b %d',
+                tickValues: 'every month',
+              }}
               enableGridX={false}
               enableGridY={false}
               theme={theme}
