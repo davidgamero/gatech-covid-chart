@@ -4,6 +4,7 @@ import './App.css';
 import Papa from 'papaparse';
 import { Line, ResponsiveLine } from '@nivo/line'
 import moment from 'moment';
+import GridLoader from 'react-spinners/GridLoader';
 
 function App() {
   const CSV_URL = 'https://gatech-covid-19-data.s3.amazonaws.com/gatech_covid_data.csv';
@@ -119,7 +120,10 @@ function App() {
                   })}
                 </tbody>
               </table>
-            </div> : 'Loading'
+            </div> : <div>
+              <GridLoader size={15} color="rgb(232, 193, 160)"></GridLoader>
+              <h3>'Loading COVID Data...'</h3>
+            </div>
         }
       </header>
     </div>
