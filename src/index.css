@@ -79,3 +79,24 @@ div.fork-me {
   align-items: center;
   justify-items: center;
 }
+
+div.time-range-button-container {
+  display: flex;
+  flex-direction: row;
+}
+
+div.time-range-button {
+  border: 1px solid white;
+  font-size: 0.75rem;
+  flex: 1;
+}
+
+p.time-range-button {
+  margin: 5px;
+}
+
+div.time-range-button.selected {
+  background-color:  rgb(232, 193, 160);
+  color: #282c34;
+  font-weight: bold;
+}

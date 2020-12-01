@@ -1,17 +1,49 @@
 import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Papa from 'papaparse';
-import { Line, ResponsiveLine } from '@nivo/line'
+import { Line } from '@nivo/line'
 import moment from 'moment';
 import GridLoader from 'react-spinners/GridLoader';
-import FaGitHub, { FaGithubSquare } from 'react-icons/fa'
+import { FaGithubSquare } from 'react-icons/fa'
+import GraphTimeRangeSelector from './components/graphTimeRangeSelector';
 
 function App() {
   const CSV_URL = 'https://gatech-covid-19-data.s3.amazonaws.com/gatech_covid_data.csv';
 
+  // Full data set
   let [data, setData] = useState();
+
+  // Data to be shown on the graph
+  let [graphData, setGraphData] = useState();
   let [tableData, setTableData] = useState();
+
+  let DESKTOP_SCREEN = window.innerWidth > 700;
+  
+  let ndaysAgo = (n) => {return new Date(new Date() - 1000 * 60*60*24*n)};
+  let twoweeksAgo = new Date(new Date() - 1000 * 60*60*24*31);
+  let [graphStartDate, setGraphStartDate] = useState(twoweeksAgo);
+  let [graphNDaysAgo,setGraphNDaysAgo] = useState(31);
+
+  useEffect(() => {
+    setGraphStartDate(ndaysAgo(graphNDaysAgo));
+  },[graphNDaysAgo])
+
+  let timeRanges = [
+    {
+      label: '1 year',
+      daysAgo: 365
+    },
+    {
+      label: '30 days',
+      daysAgo: 31
+    },
+    {
+      label: '14 days',
+      daysAgo: 15
+    }
+  ];
+
+  console.log(graphStartDate);
 
   useEffect(() => {
     document.title = "GATech Covid-19 Chart"
@@ -24,47 +56,57 @@ function App() {
         header: true,
         dynamicTyping: true,
         complete: (results, file) => {
-          console.log(results);
+          // console.log(results);
 
           // Filter for valid rows
-          data = results.data.filter((row) =>
+          let data = results.data.filter((row) =>
             row.date && row.cases);
           data = data.reverse();
           console.log(`Found ${data.length} valid rows from ${data[0].date} to ${data[data.length - 1].date}`)
 
-          // Map to xy
+          // Map to dates
           data = data.map((row) => ({
-            x: new Date(row.date),
+            date: new Date(row.date),
+            cases: row.cases,
+          }));
+
+          let gdata = data.filter((d) => d.date > graphStartDate);
+          console.log(`Showing ${gdata.length} days starting from ${graphStartDate}`)
+          console.log(gdata);
+          
+          // Map to xy
+          let xydata = gdata.map((row) => ({
+            x: row.date,
             y: row.cases
           }));
-          console.log(data);
+          
           setTableData(data.reverse());
-          setData([{
+          setGraphData([{
             id: 0,
-            data: data
+            data: [...xydata]
           }]);
+          console.log(data);
         }
       })
-  }, []);
+  }, [graphStartDate]);
 
   const theme = {
     textColor: '#ffffff',
   };
-  console.log('' + window.innerWidth + ' ' + window.innerHeight);
+  //console.log('' + window.innerWidth + ' ' + window.innerHeight);
   return (
     <div className="App">
       <header className="App-header">
-
         {
-          data ?
+          graphData ?
             <div>
               <h1>Georgia Tech Daily Covid-19 Cases</h1>
-              <div class="fork-me">
-                <a class="fork-me" href="https://github.com/davidgamero/gatech-covid-chart">Fork me on GitHub </a>
+              <div className="fork-me">
+                <a className="fork-me" href="https://github.com/davidgamero/gatech-covid-chart">Fork me on GitHub </a>
                 <FaGithubSquare size={25} />
               </div>
               <Line
-                data={data}
+                data={graphData}
 
                 width={window.innerWidth * 0.8}
                 height={window.innerHeight * 0.6}
@@ -90,8 +132,8 @@ function App() {
                 axisBottom={{
                   legend: 'Date',
                   legendOffset: 40,
-                  format: '%b %d %Y',
-                  tickValues: Math.floor(window.innerWidth / 200),
+                  format: '%b %d',
+                  tickValues: Math.floor(window.innerWidth / 100),
                   legendPosition: 'middle'
                 }}
                 axisLeft={{
@@ -101,7 +143,7 @@ function App() {
                 }}
                 axisTop={null}
                 axisRight={null}
-                enablePoints={window.innerWidth > 700}
+                enablePoints={DESKTOP_SCREEN}
                 enableGridX={false}
                 enableGridY={false}
                 theme={theme}
@@ -112,20 +154,28 @@ function App() {
                   right: 50
                 }}
               />
-              <h3 class="table-title">Data from
-                <a class="table-title" href="https://github.com/davidgamero/gatech-covid-data-scraper">gatech-covid-data-scraper</a>
+              <div>
+                <GraphTimeRangeSelector
+                timeRanges={timeRanges}
+                setGraphNDaysAgo={setGraphNDaysAgo}
+                graphNDaysAgo={graphNDaysAgo}/>
+              </div>
+              <h3 className="table-title">Data from
+                <a className="table-title" href="https://github.com/davidgamero/gatech-covid-data-scraper">gatech-covid-data-scraper</a>
               </h3>
               <table width={window.innerWidth * 0.8}
-                class="covid-table">
-                <tr>
-                  <th>Date</th>
-                  <th>Cases</th>
-                </tr>
+                className="covid-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Cases</th>
+                  </tr>
+                </thead>
                 <tbody>
-                  {tableData.map((row) => {
-                    return <tr class="covid-table">
-                      <td class="covid-table">{moment(row.x).format('MMM-DD-YYYY')}</td>
-                      <td class="covid-table">{row.y}</td>
+                  {tableData.map((row, index) => {
+                    return <tr className="covid-table" key={index}>
+                      <td className="covid-table">{moment(row.date).format('MMM-DD-YYYY')}</td>
+                      <td className="covid-table">{row.cases}</td>
                     </tr>
                   })}
                 </tbody>
